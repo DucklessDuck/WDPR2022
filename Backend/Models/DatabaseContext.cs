@@ -46,6 +46,22 @@ namespace Models
                     .HasMany(p => p.Stoelen)
                     .WithOne(p => p.Zaal);
             }
+            
+            public void CreateAccount(string username, string password)
+            {
+                using (DatabaseContext context = new DatabaseContext())
+                {
+                    Account newAccount = new Account
+                    {
+                        Gebruikersnaam = username,
+                        Wachtwoord = password
+                    };
+
+                    context.Accounts.Add(newAccount);
+                    context.SaveChanges();
+                }
+            }
+
     }
 }
 

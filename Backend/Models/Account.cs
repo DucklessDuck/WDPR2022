@@ -3,6 +3,7 @@ namespace Models
     public class Account
     {
         public string Gebruikersnaam { get; set; }
+        public string EmailAddres {get; set;}
         public string Wachtwoord { get; set; }
         public string Role { get; set; }
         public int AccountId { get; set; }
