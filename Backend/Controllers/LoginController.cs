@@ -4,14 +4,21 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Models;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class LoginController : ControllerBase
 {
+    private readonly DatabaseContext _context;
+
+    public LoginController(DatabaseContext context)
+    {
+        _context = context;
+    }
     
-    [HttpPost]
     [Route("login")]
+    [HttpPost]
     public async Task<ActionResult<ReturnResponse>> Login([FromBody] LoginRequest request)
     {
         // Validate the login credentials against the database

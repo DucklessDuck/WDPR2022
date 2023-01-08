@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { LoginForm, CreateAccountForm } from './components/Account/Account';
+import { LoginForm, CreateAccountForm } from './components/Account/CreateAccount';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <LoginForm />
+    <CreateAccountForm />
 );
 
 // If you want to start measuring performance in your app, pass a function

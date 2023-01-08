@@ -14,11 +14,10 @@ namespace Models
         public DbSet<Stoel> Stoelen { get; set; }
         public string DbPath { get; }
 
-         public DatabaseContext(DbContextOptions<DatabaseContext> options)
-            : base(options)
-        {
-        }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+            : base(options){}
 
+        
     }
 }
 

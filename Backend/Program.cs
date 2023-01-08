@@ -4,10 +4,14 @@ using Models;
 // Add services to the container.
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
-{
-    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-}));
+builder.Services.AddCors(options =>{
+     options.AddPolicy(name: "MyAllowedSpecificOrigins",
+                       policy  =>
+                       {
+                           policy.AllowAnyOrigin()
+                           .AllowAnyHeader().AllowAnyMethod(); // add the allowed origins
+                       });
+});
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlite("Data Source=database.db"));
@@ -17,7 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
-app.UseCors();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -30,7 +34,7 @@ else
    app.UseDefaultFiles();
    app.UseStaticFiles();
 }
-
+app.UseCors("MyAllowedSpecificOrigins");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

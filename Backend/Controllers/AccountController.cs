@@ -32,13 +32,13 @@ namespace API.Controllers
             {
                 return BadRequest("Leeg veld!");
             }
-            var accountId = await _context.Accounts.ToListAsync();
 
+            var accountId = await _context.Accounts.ToListAsync();
             Account account = new Account(request.username, request.emailAddress, request.password, "gebruiker", accountId.Count() +1);
             _context.Accounts.Add(account);
 
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(200);
         }
     }
 }
