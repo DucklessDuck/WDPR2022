@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\School\\WDPR2022\\WDPR\\Backend\\Backend.csproj": {}
+    "D:\\school\\Semester 3\\WDPR 2022\\Account\\WDPR\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "D:\\School\\WDPR2022\\WDPR\\Backend\\Backend.csproj": {
+    "D:\\school\\Semester 3\\WDPR 2022\\Account\\WDPR\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\School\\WDPR2022\\WDPR\\Backend\\Backend.csproj",
+        "projectUniqueName": "D:\\school\\Semester 3\\WDPR 2022\\Account\\WDPR\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "D:\\School\\WDPR2022\\WDPR\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\DucklessDuck\\.nuget\\packages\\",
-        "outputPath": "D:\\School\\WDPR2022\\WDPR\\Backend\\obj\\",
+        "projectPath": "D:\\school\\Semester 3\\WDPR 2022\\Account\\WDPR\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\User name\\.nuget\\packages\\",
+        "outputPath": "D:\\school\\Semester 3\\WDPR 2022\\Account\\WDPR\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DucklessDuck\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\User name\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -82,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

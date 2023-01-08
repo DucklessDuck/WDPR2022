@@ -11,12 +11,12 @@ public class LoginController : ControllerBase
 {
     
     [HttpPost]
-    [Route("Login")]
-    public ActionResult Login([FromBody] LoginRequest request)
+    [Route("login")]
+    public async Task<ActionResult<ReturnResponse>> Login([FromBody] LoginRequest request)
     {
         // Validate the login credentials against the database
 
-        if (request.Gebruikersnaam == "gebruikersnaam" && request.Wachtwoord == "wachtwoord")
+        if (request.gebruikersnaam == "gebruikersnaam" && request.wachtwoord == "wachtwoord")
         {
             // Generate a JWT
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -24,7 +24,7 @@ public class LoginController : ControllerBase
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, request.Gebruikersnaam),
+                    new Claim(ClaimTypes.Name, request.gebruikersnaam),
                     new Claim(ClaimTypes.NameIdentifier, "1")
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
@@ -33,20 +33,25 @@ public class LoginController : ControllerBase
                     SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            // Return the JWT in the response
-            return Ok(new { Token = tokenHandler.WriteToken(token) });
+            return new ReturnResponse(200);
         }
         else
         { 
-            
+            return new ReturnResponse(404);
         }
     }
 }
 
 public class LoginRequest
 {
-    public string Gebruikersnaam{get; set;}
-    public string Wachtwoord{get; set;}
+    public string gebruikersnaam{get; set;}
+    public string wachtwoord{get; set;}
 }
 
+public class ReturnResponse{
+    public int code{get; set;}
+
+    public ReturnResponse(int code){
+        this.code = code;
+    }
+}

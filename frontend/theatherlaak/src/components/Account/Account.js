@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
- //... Create Account Form ...//
-export function CreateAccountForm() {
+
+//... Create Account Form ...//
+export function CreateAccountForm() { 
   const [account, setAccount] = useState({});
   const handleChange = event => {
     const { name, value } = event.target;
@@ -28,53 +29,53 @@ export function CreateAccountForm() {
 
 //... Login Form ..//
 export function LoginForm() {
-  const [formData, setFormData] = useState({});
-
-  const handleChange = event => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = event => {
+    // get the values of the input fields
+    const handleSubmit = (event) => {
     event.preventDefault();
-    fetch('https://api.example.com/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: formData.username,
-        password: formData.password,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
-  };
+    const form = event.target;
+    const username = form.elements.username.value;
+    const password = form.elements.password.value;
 
-  return (
-    <form>
-      <label htmlFor="username">Username:</label>
-      <input type="text" id="username" name="username" onChange={handleChange} />
-      <br />
-      <label htmlFor="password">Password:</label>
-      <input type="password" id="password" name="password" onChange={handleChange} />
-      <br />
-      <button type="submit" onChange={handleSubmit}>Log In</button>
-    </form>
-  );
-}
+      fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+    };
+
+    // axios.post('/login', {
+    //   username: 'admin',
+    //   password: 'password123',
+    // });
+   
+    return (
+      <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username:</label>
+        <input type="text" name="username" />
+        <br />
+        <label htmlFor="password">Password:</label>
+        <input type="password" name="password" />
+        <br />
+        <button type="submit">Log In</button>
+      </form>
+      </div>
+    );
+  }
+
+  
 
 //... Get Account ...//
-async function getAccounts() {
-  try {
-    const response = await fetch('https://api.example.com/accounts');
-    const data = await response.json();
-    console.log(data);
-    // TODO Show data on page
-  } catch (error) {
-    console.error(error);
-  }
+export async function getAccounts() {
+    try {
+      const response = await fetch('https://api.example.com/accounts');
+      const data = await response.json();
+      console.log(data);
+      // TODO Show data on page
+    } catch (error) {
+      console.error(error);
+    }
 }
+
 
 
