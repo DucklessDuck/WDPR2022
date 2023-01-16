@@ -4,4 +4,4 @@ const NoPage = () => {
     //waneer je een invalid pagina opent 
   };
   
-  export default NoPage;
+export default NoPage;
