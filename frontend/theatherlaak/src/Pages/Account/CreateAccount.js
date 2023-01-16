@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
-
 
 //... Create Account Form ...//
-
-  
-  // const form = document.getElementById('createAccountForm');
-  // form.addEventListener('submit', handleSubmit);
 
 export function CreateAccountForm() { 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  function createAccount(){
-
+function createAccount(){
     fetch("https://localhost:7295/Account/create", {
       method: "POST",
       mode: "cors",
@@ -30,7 +23,7 @@ export function CreateAccountForm() {
     })
     .then(response => response.json())
     .then(data => console.log(data));
-  }
+}
 
   return (
     <div id="createAccountForm">
