@@ -1,25 +1,22 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace Models
 {
-    public class Account
+    public class Account : IdentityUser
     {
-        public string Gebruikersnaam { get; set; }
-        public string EmailAddres {get; set;}
-        public string Wachtwoord { get; set; }
-        public string Role { get; set; }
-        public int AccountId { get; set; }
-        public List<Kaart> TicketLijst{get; set;}
+        public virtual ICollection<Kaart> tickets { get; set; }
 
-        public Account()
-        {
+
+        // protected Account()
+        // {
             
-        }
-        public Account(string GN, string EA, string WW, string R, int AI)
-        {
-            this.Gebruikersnaam = GN;
-            this.EmailAddres = EA;
-            this.Wachtwoord = WW;
-            this.Role = R;
-            this.AccountId = AI;
-        }
+        // }
+        // public Account(string GN, string EA, string WW)
+        // {
+        //     this.Gebruikersnaam = GN;
+        //     this.EmailAddres = EA;
+        //     this.Wachtwoord = WW;
+
+        // }
     }
 }

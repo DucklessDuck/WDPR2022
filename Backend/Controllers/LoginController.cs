@@ -2,19 +2,21 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Models;
 
 [ApiController]
-[Route("[controller]")]
 public class LoginController : ControllerBase
 {
     private readonly DatabaseContext _context;
+    private readonly SignInManager<Account> _signInManager;
 
-    public LoginController(DatabaseContext context)
+    public LoginController(DatabaseContext context, SignInManager<Account> signInManager)
     {
         _context = context;
+        _signInManager = signInManager;
     }
     
     [Route("login")]
@@ -22,8 +24,9 @@ public class LoginController : ControllerBase
     public async Task<ActionResult<ReturnResponse>> Login([FromBody] LoginRequest request)
     {
         // Validate the login credentials against the database
-
-        if (request.gebruikersnaam == "gebruikersnaam" && request.wachtwoord == "wachtwoord")
+        var resultAccount = _context.Accounts.Where((e) => e.Email == request.emailAddress).FirstOrDefault();
+        var result = _signInManager.PasswordSignInAsync(resultAccount, request.wachtwoord, true, false);
+        if (result != null)
         {
             // Generate a JWT
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -31,15 +34,16 @@ public class LoginController : ControllerBase
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, request.gebruikersnaam),
+                    new Claim(ClaimTypes.Email, resultAccount.Email),
                     new Claim(ClaimTypes.NameIdentifier, "1")
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my_secret_key")),
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my_secret_key".HashString())),
                     SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            
             return new ReturnResponse(200);
         }
         else
@@ -51,7 +55,7 @@ public class LoginController : ControllerBase
 
 public class LoginRequest
 {
-    public string gebruikersnaam{get; set;}
+    public string emailAddress{get; set;}
     public string wachtwoord{get; set;}
 }
 

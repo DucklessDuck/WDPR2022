@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models;
+
 
 // Add services to the container.
 var builder = WebApplication.CreateBuilder(args);
@@ -13,15 +15,22 @@ builder.Services.AddCors(options =>{
                        });
 });
 
-builder.Services.AddDbContext<DatabaseContext>(options =>
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+		options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<DatabaseContext>()
+    .AddDefaultTokenProviders();
+                
+builder.Services.AddDbContext<DatabaseContext>(optionsAction: options =>
     options.UseSqlite("Data Source=database.db"));
 
+builder.Services.AddAuthorization(options =>
+    options.AddPolicy("TwoFactorEnabled", x => x.RequireClaim("amr", "mfa")));
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var app = builder.Build();
 
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
