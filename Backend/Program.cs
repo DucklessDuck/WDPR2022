@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>{
                        });
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddIdentity<Account, IdentityRole>(options =>
 		options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultTokenProviders();

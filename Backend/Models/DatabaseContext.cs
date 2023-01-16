@@ -18,35 +18,35 @@ public class DatabaseContext : IdentityDbContext<Account>
         base.OnModelCreating(builder);
 
         //Rename Tables
-        builder.HasDefaultSchema("Identity");
-        builder.Entity<Account>(entity =>
-        {
-            entity.ToTable(name: "User");
-        });
-        builder.Entity<Account>(entity =>
-        {
-            entity.ToTable(name: "Role");
-        });
-        builder.Entity<Account>(entity =>
-        {
-            entity.ToTable("UserRoles");
-        });
-        builder.Entity<Account>(entity =>
-        {
-            entity.ToTable("UserClaims");
-        });
-        builder.Entity<Account>(entity =>
-        {
-            entity.ToTable("UserLogins");
-        });
-        builder.Entity<Account>(entity =>
-        {
-            entity.ToTable("RoleClaims");
-        });
-        builder.Entity<Account>(entity =>
-        {
-            entity.ToTable("UserTokens");
-        });
+        // builder.HasDefaultSchema("Identity");
+        // builder.Entity<Account>(entity =>
+        // {
+        //     entity.ToTable(name: "User");
+        // });
+        // builder.Entity<Account>(entity =>
+        // {
+        //     entity.ToTable(name: "Role");
+        // });
+        // builder.Entity<Account>(entity =>
+        // {
+        //     entity.ToTable("UserRoles");
+        // });
+        // builder.Entity<Account>(entity =>
+        // {
+        //     entity.ToTable("UserClaims");
+        // });
+        // builder.Entity<Account>(entity =>
+        // {
+        //     entity.ToTable("UserLogins");
+        // });
+        // builder.Entity<Account>(entity =>
+        // {
+        //     entity.ToTable("RoleClaims");
+        // });
+        // builder.Entity<Account>(entity =>
+        // {
+        //     entity.ToTable("UserTokens");
+        // });
 
         //Configure 
         
