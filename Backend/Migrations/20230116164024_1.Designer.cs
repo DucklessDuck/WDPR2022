@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230114174630_IntialCreate")]
-    partial class IntialCreate
+    [Migration("20230116164024_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,16 +178,8 @@ namespace Backend.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EmailAddres")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Gebruikersnaam")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
@@ -220,10 +212,6 @@ namespace Backend.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Wachtwoord")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -427,7 +415,7 @@ namespace Backend.Migrations
             modelBuilder.Entity("Models.Kaart", b =>
                 {
                     b.HasOne("Models.Account", "Bezoeker")
-                        .WithMany("TicketLijst")
+                        .WithMany("tickets")
                         .HasForeignKey("BezoekerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -456,7 +444,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Models.Account", b =>
                 {
-                    b.Navigation("TicketLijst");
+                    b.Navigation("tickets");
                 });
 
             modelBuilder.Entity("Models.Voorstelling", b =>

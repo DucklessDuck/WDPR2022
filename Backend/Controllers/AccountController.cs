@@ -79,8 +79,8 @@ namespace API.Controllers
     [Route("create")]
     public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequestData request)
     {
-        var user = new Account{UserName = request.username, Email = request.emailAddress};
-        var result = await _usermanager.CreateAsync(user, request.password);
+        var user = new Account{UserName = request.username, Email = request.emailAddress, PasswordHash = request.password};
+        var result = await _usermanager.CreateAsync(user);
         return result.Succeeded ? new BadRequestObjectResult(result) : StatusCode(201);
     }
 
