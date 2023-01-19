@@ -1,33 +1,16 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Contact from "./pages/Contact";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import NoPage from "./pages/NoPage";
-import Layout from "./pages/Layout";
-import Zalen from "./pages/Zalen";
-import { Bestellen } from "./components/Bestellen";
-import {Betaling} from "./components/Betaling";
-
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="zalen" element={<Zalen />} />
-          <Route path="betaling" element={<Betaling />} />
-          <Route path="bestellen" element={<Bestellen />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-}
+import './App.css';
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+reportWebVitals();

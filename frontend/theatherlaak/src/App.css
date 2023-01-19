@@ -1,38 +1,67 @@
-.App {
+/*... Layout (Navbar) ...*/
+
+body{
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #E93C3C;
+  border-radius: 1px;
+  box-shadow: #111;
+}
+
+li {
+  float: left; 
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  font-size: 15px;
+  padding: 14px 16px;
+  text-decoration: none;
+
+  border: #E93C3C solid 5px;
+  border-radius: 15px;
+}
+
+li a:hover:not(.active) {
+  background-color: rgb(153, 136, 136);
+}
+
+#navbar-right{
+  float: right;
+}
+
+#home-button{
+  padding-right: 80px;
+  color: white;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Home */
+
+
+/* Bestellen */
+
+
+/* Login */
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
