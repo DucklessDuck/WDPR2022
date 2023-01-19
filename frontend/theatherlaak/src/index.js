@@ -8,8 +8,7 @@ import Login from "./pages/Login";
 import NoPage from "./pages/NoPage";
 import Layout from "./pages/Layout";
 import Zalen from "./pages/Zalen";
-import { Bestellen } from "./components/Bestellen";
-import {Betaling} from "./components/Betaling";
+
 
 export default function App() {
   return (
@@ -20,8 +19,6 @@ export default function App() {
           <Route path="login" element={<Login />} />
           <Route path="contact" element={<Contact />} />
           <Route path="zalen" element={<Zalen />} />
-          <Route path="betaling" element={<Betaling />} />
-          <Route path="bestellen" element={<Bestellen />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
