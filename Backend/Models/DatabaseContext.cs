@@ -17,6 +17,8 @@ public class DatabaseContext : IdentityDbContext<Account>
         //Fluent API
         base.OnModelCreating(builder);
 
+        
+
         //Rename Tables
         // builder.HasDefaultSchema("Identity");
         // builder.Entity<Account>(entity =>
