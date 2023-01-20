@@ -1,20 +1,23 @@
 
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
+
 namespace API.Controllers
 {
 
-    [Route("[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("[controller]")]
     [ApiController]
     public class FakePayController : ControllerBase
     {
         private readonly DatabaseContext _context;
 
-        public AccountController(DatabaseContext context)
+        public FakePayController(DatabaseContext context)
         {
             _context = context;
         }
 
         [HttpPost]
-        [Route("fakepay/success")]
+        [Microsoft.AspNetCore.Mvc.Route("fakepay/success")]
         public async Task<ActionResult> CreateAccount([FromBody] FakePayRequestData request)
         {
             // // Validate the request data and create the account in the database
