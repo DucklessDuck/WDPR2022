@@ -24,24 +24,19 @@
 function LoginForm() {
     return (
       <div>
-
+        <h2>Inloggen</h2>
         <form onSubmit={handleSubmit}>
           <div class="container">
             <label htmlFor="username"><b>Gebruikersnaam</b></label>
-            <input type="text" placeholder="Vul Gebruikersnaam in. " name="username" alt="Gebruikersnaam invulvak" required /><br/>
-              
+            <input type="text" placeholder="Vul Gebruikersnaam in. " name="username" alt="Gebruikersnaam invulvak" required />
+            <br />
             <label htmlFor="password"><b>Wachtwoord</b></label>
-            <input type="password" placeholder="Vul Wachtwoord in. " name="password" alt="Wachtwoord invulvak" required /><br/>
-              
+            <input type="password" placeholder="Vul Wachtwoord in. " name="password" alt="Wachtwoord invulvak" required />
+            <br />
             <button type="submit">Login</button>
             <label>
-              <input type="checkbox" checked="checked" name="remember" /> Remember me
+              <input type="checkbox" checked="checked" name="remember" /> Onthoud mij
             </label>
-          </div>
-
-          <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
           </div>
 
         </form>

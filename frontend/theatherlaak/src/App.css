@@ -1,4 +1,4 @@
-/*... Layout (Navbar) ...*/
+/* ... Layout (Navbar) ... */
 
 body{
   margin: 0;
@@ -51,17 +51,59 @@ li a:hover:not(.active) {
 
 
 /* Login */
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-/* Full-width inputs */
+form {
+  border: 3px solid #f1f1f1;
+}
+
+h2 {
+  padding: 12px 20px;
+  font-size: 30px;
+}
+
 input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
+  margin: 8px 0;  
   border: 1px solid #ccc;
   box-sizing: border-box;
+  white-space: pre-wrap;
+}
+
+button {
+  background-color: #E93C3C;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.75;
 }
 
 
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}

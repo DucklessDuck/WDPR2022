@@ -9,7 +9,7 @@ const Layout = () => {
     <>
       <nav classname="navbar">
         <ul classname="navbar-itemList">
-          <li id="home-button">
+          <li classname="navbar-items" id="home-button">
             <Link to="/">Theather Laak</Link>
           </li>
           <li classname="navbar-items">
