@@ -10,7 +10,7 @@ export function CreateVoorstellingForm() {
     // const [image, setImage] = useState();
     
     const [image, setSelectedImage] = useState(null);
-    
+    const [file, setFileName] = useState();
 
 
         function VoorstellingAanmaken() {
