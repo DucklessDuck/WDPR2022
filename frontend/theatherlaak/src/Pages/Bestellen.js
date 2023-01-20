@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 export class Bestellen extends Component {
   static displayname = Bestellen.name;
 
+  const
+
   render() {
     return (
       <div>

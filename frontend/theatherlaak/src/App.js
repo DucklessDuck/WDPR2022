@@ -1,47 +1,32 @@
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 
-import React from 'react';
+import Contact from "./Pages/Contact";
+import Home from "./Pages/Home";
+import LoginForm from "./Pages/Account/Login";
+import NoPage from "./Pages/NoPage";
+import Layout from "./components/Layout";
+import Zalen from "./Pages/Zalen";
+import { Bestellen } from "./Pages/Bestellen";
+import {Betaling} from "./Pages/Betaling";
+
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<LoginForm />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="zalen" element={<Zalen />} />
+          <Route path="betaling" element={<Betaling />} />
+          <Route path="bestellen" element={<Bestellen />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
-import { Layout } from './components/Layout.js';
-import './custom.css';
-
-export default class App extends Component {
-  static displayName = App.name;
-
-  render() {
-    return (
-      <Layout>
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            const { element, ...rest } = route;
-            return <Route key={index} {...rest} element={element} />;
-          })}
-        </Routes>
-      </Layout>
-    );
-  }
-}
+export default App;

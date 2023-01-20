@@ -21,18 +21,27 @@
     //   password: 'password123',
     // });
 
-export function LoginForm() {
+function LoginForm() {
     return (
       <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input type="text" name="username" />
-        <br />
-        <label htmlFor="password">Password:</label>
-        <input type="password" name="password" />
-        <br />
-        <button type="submit">Log In</button>
-      </form>
+        <h2>Inloggen</h2>
+        <form onSubmit={handleSubmit}>
+          <div class="container">
+            <label htmlFor="username"><b>Gebruikersnaam</b></label>
+            <input type="text" placeholder="Vul Gebruikersnaam in. " name="username" alt="Gebruikersnaam invulvak" required />
+            <br />
+            <label htmlFor="password"><b>Wachtwoord</b></label>
+            <input type="password" placeholder="Vul Wachtwoord in. " name="password" alt="Wachtwoord invulvak" required />
+            <br />
+            <button type="submit">Login</button>
+            <label>
+              <input type="checkbox" checked="checked" name="remember" /> Onthoud mij
+            </label>
+          </div>
+
+        </form>
       </div>
     );
   }
+
+export default LoginForm;

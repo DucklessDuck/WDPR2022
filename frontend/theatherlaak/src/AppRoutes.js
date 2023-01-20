@@ -2,7 +2,6 @@ import { Home } from "./components/Home";
 import { Bestellen } from "./components/Bestellen";
 import { Agenda } from "./components/Agenda";
 import { Betaling } from "./components/Betaling";
-
 import { Login } from "./components/Account/Login";
 
 const AppRoutes = [
