@@ -1,5 +1,4 @@
 import { Outlet, Link } from "react-router-dom";
-import '../App.css';
 import React from "react";
 
 
@@ -7,12 +6,12 @@ import React from "react";
 const Layout = () => {
   return (
     <>
-      <nav classname="navbar">
-        <ul classname="navbar-itemList">
-          <li classname="navbar-items" id="home-button">
+      <nav class="navbar">
+        <ul class="navbar-itemList">
+          <li class="navbar-items" id="home-button">
             <Link to="/">Theather Laak</Link>
           </li>
-          <li classname="navbar-items">
+          <li class="navbar-items">
             <Link to="/voorstellingen">Voorstellingen</Link>
           </li>
           {/* <li classname="navbar-items">
@@ -21,13 +20,13 @@ const Layout = () => {
           <li classname="navbar-items">
             <Link to="/betaling">Betaling</Link>
           </li> */}
-          <li classname="navbar-items">
+          <li class="navbar-items">
             <Link to="/over-ons">Over ons</Link>
           </li>
-          <li classname="navbar-items">
+          <li class="navbar-items">
             <Link to="/contact">Contact</Link>
           </li>
-          <li classname="navbar-items" id="navbar-right">
+          <li class="navbar-items" id="navbar-right">
             <Link to="/login">Login</Link>
           </li>
         </ul>

@@ -33,7 +33,7 @@ function LoginForm() {
             <label htmlFor="password"><b>Wachtwoord</b></label>
             <input type="password" placeholder="Vul Wachtwoord in. " name="password" alt="Wachtwoord invulvak" required />
             <br />
-            <button type="submit">Login</button>
+            <button className="buttonRed" type="submit">Login</button>
             <label>
               <input type="checkbox" checked="checked" name="remember" /> Onthoud mij
             </label>
