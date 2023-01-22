@@ -42,7 +42,6 @@ export function CreateVoorstellingForm() {
 
         return (
             <div id="createVoorstelling">
-
                 <label htmlFor="name">Naam voorstelling:</label>
                 <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} />
                 <br />
