@@ -22,6 +22,31 @@ namespace API.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Voorstelling>>> GetVoorstellingen()
+        {
+            try
+            {
+                return (await _context.Voorstellingen.ToListAsync());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
+        //... Get accountId by emailaddress ..//
+        [HttpGet("getVoorstellingenByDate")]
+        public async Task<ActionResult<Voorstelling>> getVoorstellingenByDate(DateTime datum)
+        {
+            var result = await _context.Voorstellingen.Where((e) => e.VoorstellingsDatum >= datum).FirstOrDefaultAsync();
+            if(result == null)
+                return NotFound();
+
+            return result;
+        }
+
 
 
         //... Aanmaken van voorstelling ...//
@@ -29,8 +54,7 @@ namespace API.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateVoorstelling([FromBody] CreateVoorstellingRequestData request)
         {
-
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", request.file.FileName);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
             var voorstelling = new Voorstelling
             {
@@ -57,7 +81,7 @@ namespace API.Controllers
             public string beschrijving { get; set; }
             public int zaalid { get; set; }
 
-            public FileModel file {get; set;}
+            // public FileModel file {get; set;}
 
             // public List<BetrokkenPersoon> Crew { get; set; }
             // public List<Kaart> Tickets { get; set; }

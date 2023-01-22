@@ -1,11 +1,6 @@
 
 
 
-
-
-
-
-
 import { useState } from "react";
 import React from 'react';
 import { CreateVoorstellingForm } from "./createVoorstelling";
@@ -34,6 +29,7 @@ function MyForm() {
                     <p>Toegangelijk voor invalide</p>
                 </div>
             </div>
+
 
             <div class="column">
                 <div class="card">
