@@ -64,7 +64,6 @@ export class Agenda extends Component {
         const response = await fetch("https://randomuser.me/api?results=10");
         const data = await response.json();
 
-        console.log('Returned event data:', JSON.stringify(data, null, 2));
 
         this.setState({ voorstellingen: data, loading: false });
     }
