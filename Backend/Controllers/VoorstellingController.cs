@@ -22,6 +22,31 @@ namespace API.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Voorstelling>>> GetVoorstellingen()
+        {
+            try
+            {
+                return (await _context.Voorstellingen.ToListAsync());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
+        //... Get accountId by emailaddress ..//
+        [HttpGet("getVoorstellingenByDate")]
+        public async Task<ActionResult<Voorstelling>> getVoorstellingenByDate(DateTime datum)
+        {
+            var result = await _context.Voorstellingen.Where((e) => e.VoorstellingsDatum >= datum).FirstOrDefaultAsync();
+            if(result == null)
+                return NotFound();
+
+            return result;
+        }
+
 
 
         //... Aanmaken van voorstelling ...//
