@@ -2548,26 +2548,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jesse\\.nuget\\packages\\": {}
+    "C:\\Users\\DucklessDuck\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\School\\hhs\\2022\\WDPR\\2023\\ProjectVSC\\WDPR\\Backend\\Backend.csproj",
+      "projectUniqueName": "D:\\School\\WDPR2022\\Voorstellingen\\WDPR\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "D:\\Documents\\School\\hhs\\2022\\WDPR\\2023\\ProjectVSC\\WDPR\\Backend\\Backend.csproj",
-      "packagesPath": "C:\\Users\\jesse\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\School\\hhs\\2022\\WDPR\\2023\\ProjectVSC\\WDPR\\Backend\\obj\\",
+      "projectPath": "D:\\School\\WDPR2022\\Voorstellingen\\WDPR\\Backend\\Backend.csproj",
+      "packagesPath": "C:\\Users\\DucklessDuck\\.nuget\\packages\\",
+      "outputPath": "D:\\School\\WDPR2022\\Voorstellingen\\WDPR\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jesse\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\DucklessDuck\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

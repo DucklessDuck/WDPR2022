@@ -4,19 +4,14 @@ namespace Models
 {
     public class Account : IdentityUser
     {
-        public virtual ICollection<Kaart> tickets { get; set; }
-
-
-        // protected Account()
-        // {
-            
-        // }
-        // public Account(string GN, string EA, string WW)
-        // {
-        //     this.Gebruikersnaam = GN;
-        //     this.EmailAddres = EA;
-        //     this.Wachtwoord = WW;
-
-        // }
+        public virtual ICollection<Kaart> Tickets { get; set; }
+        public double DonatieCounter { 
+            get{
+                return DonatieCounter;
+            }
+            set{
+                DonatieCounter = 0;
+            }
+        }
     }
 }

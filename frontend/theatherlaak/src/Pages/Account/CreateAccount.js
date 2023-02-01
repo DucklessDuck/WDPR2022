@@ -42,17 +42,5 @@ export function CreateAccountForm() {
 }
 
 
-//... Get Account ...//
-// export async function getAccounts() {
-//     try {
-//       const response = await fetch('https://localhost:7295/api/Account/');
-//       const data = await response.json();
-//       console.log(data);
-//       // TODO Show data on page
-//     } catch (error) {
-//       console.error(error);
-//     }
-// }
-
 
 

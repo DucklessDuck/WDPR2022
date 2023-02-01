@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230201154841_2")]
+    partial class _2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -23,10 +26,6 @@ namespace Backend.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -44,10 +43,6 @@ namespace Backend.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -164,9 +159,6 @@ namespace Backend.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("DonatieCounter")
-                        .HasColumnType("REAL");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -206,6 +198,9 @@ namespace Backend.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
+
+                    b.Property<double>("donatieCounter")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
@@ -340,28 +335,6 @@ namespace Backend.Migrations
                     b.ToTable("Zalen");
                 });
 
-            modelBuilder.Entity("CustomRole", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
-
-                    b.Property<string>("AccountId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
-
-                    b.HasIndex("AccountId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasDiscriminator().HasValue("CustomRole");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -427,7 +400,7 @@ namespace Backend.Migrations
             modelBuilder.Entity("Models.Kaart", b =>
                 {
                     b.HasOne("Models.Account", "Bezoeker")
-                        .WithMany("Tickets")
+                        .WithMany("tickets")
                         .HasForeignKey("BezoekerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -461,26 +434,9 @@ namespace Backend.Migrations
                         .HasForeignKey("BetrokkenPersoonPersoonId");
                 });
 
-            modelBuilder.Entity("CustomRole", b =>
-                {
-                    b.HasOne("Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Account");
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("Models.Account", b =>
                 {
-                    b.Navigation("Tickets");
+                    b.Navigation("tickets");
                 });
 
             modelBuilder.Entity("Models.BetrokkenPersoon", b =>

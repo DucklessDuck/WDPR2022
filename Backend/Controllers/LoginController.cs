@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Models;
 
@@ -12,57 +13,66 @@ public class LoginController : ControllerBase
 {
     private readonly DatabaseContext _context;
     private readonly SignInManager<Account> _signInManager;
+    private readonly UserManager<Account> _userManager;
+    public IConfiguration _configuration;
 
-    public LoginController(DatabaseContext context, SignInManager<Account> signInManager)
+    public LoginController(DatabaseContext context, SignInManager<Account> signInManager, IConfiguration config)
     {
         _context = context;
         _signInManager = signInManager;
+        _configuration = config;
     }
-    
-    [Route("login")]
-    [HttpPost]
-    public async Task<ActionResult<ReturnResponse>> Login([FromBody] LoginRequest request)
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
-        // Validate the login credentials against the database
-        var resultAccount = _context.Accounts.Where((e) => e.Email == request.emailAddress).FirstOrDefault();
-        var result = _signInManager.PasswordSignInAsync(resultAccount, request.wachtwoord, true, false);
-        if (result != null)
+        var user = await _userManager.FindByNameAsync(request.emailAddress);
+        if (user == null)
         {
-            // Generate a JWT
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenDescriptor = new SecurityTokenDescriptor
+            return Unauthorized();
+        }
+        var result = await _signInManager.CheckPasswordSignInAsync(user, request.wachtwoord, false);
+        if (!result.Succeeded)
+        {
+            return Unauthorized();
+        }
+        var roles = await _userManager.GetRolesAsync(user);
+        var claims = new List<Claim>
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Email, resultAccount.Email),
-                    new Claim(ClaimTypes.NameIdentifier, "1")
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my_secret_key".HashString())),
-                    SecurityAlgorithms.HmacSha256Signature)
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("userId", user.Id)
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            
-            return new ReturnResponse(200);
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim("roles", role));
         }
-        else
-        { 
-            return new ReturnResponse(404);
-        }
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWT:SigningKey")));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var token = new JwtSecurityToken(
+            _configuration.GetValue<string>("JWT:Issuer"),
+            _configuration.GetValue<string>("JWT:Issuer"),
+            claims,
+            expires: DateTime.Now.AddDays(10),
+            signingCredentials: creds);
+        return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
     }
+
 }
 
 public class LoginRequest
 {
-    public string emailAddress{get; set;}
-    public string wachtwoord{get; set;}
+    public string emailAddress { get; set; }
+    public string wachtwoord { get; set; }
 }
 
-public class ReturnResponse{
-    public int code{get; set;}
+public class ReturnResponse
+{
+    public int code { get; set; }
 
-    public ReturnResponse(int code){
+    public ReturnResponse(int code)
+    {
         this.code = code;
     }
 }
+

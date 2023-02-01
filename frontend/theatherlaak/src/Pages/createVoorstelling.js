@@ -1,6 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
+const zalen = async () => {
+    await fetch("https://localhost:7277/Zaal/get")
+    .then(response => response.json())
+    .then(responseData => {
+        console.log(responseData);
+        setZaalData(responseData)
+    })
+}
 
+useEffect(() => {
+    zalen()
+}, [])
 
 //... Create Voorstelling Form ...//
 export function CreateVoorstellingForm() {

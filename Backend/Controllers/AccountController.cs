@@ -9,13 +9,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 
-namespace API.Controllers
+namespace Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -45,25 +47,87 @@ namespace API.Controllers
             }
         }
 
-        //... Get accountId by emailaddress ..//
-        [HttpGet("getAccountByEmail")]
-        public async Task<ActionResult<Account>> GetAccountByEmail(string emailAddress)
-        {
-            var result = await _context.Accounts.Where((e) => e.Email == emailAddress).FirstOrDefaultAsync();
-            if (result == null)
-                return NotFound();
-
-            return result;
-        }
-
         //... Create Account ...//
         [HttpPost]
-        [Route("create")]
-        public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequestData request)
+        public async Task<ActionResult<Account>> PostUser(Account account)
         {
-            var user = new Account { UserName = request.username, Email = request.emailAddress, PasswordHash = request.password };
-            var result = await _usermanager.CreateAsync(user);
-            return result.Succeeded ? new BadRequestObjectResult(result) : StatusCode(201);
+            if (_context.Accounts == null)
+            {
+                return Problem("No users found. ");
+            }
+            _context.Accounts.Add(account);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (getUser(account.Id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetUser", new { id = account.Id }, account);
+        }
+
+        //... Edit Account ...//
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(string id, Account account)
+        {
+            if (id != account.Id)
+            {
+                return BadRequest();
+            }
+
+            // _context.Entry(account).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!getUser(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // DELETE: api/User/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            if (_context.Accounts == null)
+            {
+                return NotFound();
+            }
+            var user = await _context.Accounts.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.Accounts.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool getUser(string id)
+        {
+            return (_context.Accounts?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
 
